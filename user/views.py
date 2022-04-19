@@ -3,8 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework import viewsets
 
-from user.models import Location
-from user.serializers import LocationSerializer
+from user.models import Location, Employee, Job, Manager
+from user.serializers import LocationSerializer, EmployeeSerializer, JobSerializer, ManagerSerializer
 
 
 class LocationViewSet(viewsets.ModelViewSet):
@@ -12,6 +12,14 @@ class LocationViewSet(viewsets.ModelViewSet):
     serializer_class = LocationSerializer
 
 
-from django.shortcuts import render
+class EmployeeViewSet(viewsets.ModelViewSet):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
 
-# Create your views here.
+class JobViewSet(viewsets.ModelViewSet):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
+
+class ManagerViewSet(viewsets.ModelViewSet):
+    queryset = Manager.objects.all()
+    serializer_class = ManagerSerializer
