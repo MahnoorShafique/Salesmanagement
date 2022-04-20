@@ -29,14 +29,19 @@ class UserSerializer(serializers.ModelSerializer):
 
 class EmployeeSerializer(serializers.ModelSerializer):
     job_id = JobSerializer()
+    manager=ManagerSerializer()
+
 
     class Meta:
         model = Employee
-        fields = ['hire_date', 'manager', 'job_id']
+        fields = ['first_name','last_name','hire_date','manager', 'job_id','manager']
 
     def create(self, validated_data):
         jobid = validated_data.pop('job_id')
-        Job.objects.create(**jobid)
+        manag=validated_data.pop('manager')
 
-        # Employee_instance = Employee.objects.create(**validated_data)
-        return Job
+        job=JobSerializer.create(JobSerializer(),validated_data=jobid)
+        manager = ManagerSerializer.create(ManagerSerializer(), validated_data=manag)
+        emp= Employee.objects.create(**validated_data,manager=manager,job_id=job)
+
+        return emp

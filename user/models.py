@@ -53,7 +53,7 @@ class Manager(models.Model):
 
 class Employee(User):
     job_id = models.OneToOneField(Job, on_delete=models.CASCADE, null=True, blank=True, default=None)
-    hire_date = models.DateField()
+    hire_date = models.DateField(default=None)
     manager = models.ForeignKey(Manager, on_delete=models.CASCADE,default=None)
 
     def __str__(self):

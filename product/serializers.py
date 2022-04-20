@@ -42,8 +42,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class SupplierSerializer(serializers.ModelSerializer):
-    # location = LocationSerializer()
-    # product = ProductSerializer()
 
     class Meta:
         model = Supplier
